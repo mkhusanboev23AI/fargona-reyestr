@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="uz-Latn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tadbirkorlar bilan uchrashuvlar reyestri — Fargʻona tumani hokimligi</title>
+<meta name="description" content="Fargʻona tumani hokimligiga tashrif buyurgan tadbirkorlar reyestri: murojaatlar, masʼul tashkilotlar va ijro holati.">
+<meta name="theme-color" content="#0f2a4a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <span data-i18n="country"></span>
+    <div class="tb-right">
+      <span id="today"></span>
+      <label class="lang">🌐
+        <select id="lang" aria-label="Til / Language"></select>
+      </label>
+    </div>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap header-in">
+    <a class="brand" href="#">
+      <img src="favicon.svg" alt="" width="44" height="44">
+      <span>
+        <b data-i18n="brandTitle"></b>
+        <small data-i18n="brandSub"></small>
+      </span>
+    </a>
+    <button class="menu-btn" id="menuBtn" data-i18n-aria="menu">☰</button>
+    <nav class="nav" id="nav">
+      <a href="#reyestr" data-i18n="navReg"></a>
+      <a href="#statistika" data-i18n="navStats"></a>
+      <a href="#kelgusi" id="navUpcoming" data-i18n="navUp" hidden></a>
+      <a href="#murojaat" class="btn btn-sm" data-i18n="navReq"></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <p class="eyebrow" data-i18n="eyebrow"></p>
+        <h1 data-i18n="h1"></h1>
+        <p class="lead" data-i18n="lead"></p>
+        <div class="hero-actions">
+          <a href="#reyestr" class="btn btn-gold" data-i18n="btnReg"></a>
+          <a href="#murojaat" class="btn btn-ghost" data-i18n="btnReq"></a>
+        </div>
+        <p class="asof" id="asof"></p>
+      </div>
+      <div class="next-card" id="nextCard"></div>
+    </div>
+  </section>
+
+  <section class="wrap stats" id="stats"></section>
+
+  <section class="wrap section" id="reyestr">
+    <div class="section-head">
+      <h2 data-i18n="regTitle"></h2>
+      <p data-i18n="regSub"></p>
+    </div>
+    <div class="chips" id="statusChips"></div>
+    <div class="filters">
+      <input type="search" id="fSearch" data-i18n-ph="searchPh">
+      <select id="fMonth"></select>
+      <select id="fOrg"></select>
+      <button class="btn btn-ghost btn-sm" id="exportCsv" type="button" data-i18n="csv"></button>
+    </div>
+    <p class="result-count" id="resultCount"></p>
+    <div class="table-wrap">
+      <table class="registry">
+        <thead>
+          <tr>
+            <th data-i18n="thNo"></th><th data-i18n="thDate"></th><th data-i18n="thWho"></th>
+            <th data-i18n="thIssue"></th><th data-i18n="thResp"></th><th data-i18n="thStatus"></th>
+          </tr>
+        </thead>
+        <tbody id="registryBody"></tbody>
+      </table>
+      <p class="empty" id="registryEmpty" data-i18n="empty" hidden></p>
+    </div>
+    <div class="more"><button class="btn btn-ghost" id="moreBtn" type="button" hidden></button></div>
+  </section>
+
+  <section class="wrap section" id="statistika">
+    <div class="section-head">
+      <h2 data-i18n="anTitle"></h2>
+      <p data-i18n="anSub"></p>
+    </div>
+    <div class="analytics three">
+      <div class="panel"><h3 data-i18n="anStatus"></h3><div id="byStatus" class="bars"></div></div>
+      <div class="panel"><h3 data-i18n="anOrg"></h3><div id="byOrg" class="bars"></div></div>
+      <div class="panel"><h3 data-i18n="anMonth"></h3><div id="byMonth" class="bars"></div></div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="kelgusi" hidden>
+    <div class="section-head">
+      <h2 data-i18n="upTitle"></h2>
+      <p data-i18n="upSub"></p>
+    </div>
+    <div class="upcoming" id="upcoming"></div>
+  </section>
+
+  <section class="wrap section" id="murojaat">
+    <div class="section-head">
+      <h2 data-i18n="reqTitle"></h2>
+      <p data-i18n="reqSub"></p>
+    </div>
+    <form class="panel form" id="requestForm">
+      <div class="grid2">
+        <label><span data-i18n="fFish"></span> <input name="fish" required maxlength="120"></label>
+        <label><span data-i18n="fKorxona"></span> <input name="korxona" required maxlength="120"></label>
+        <label><span data-i18n="fTel"></span> <input name="telefon" type="tel" required placeholder="+998 __ ___ __ __" maxlength="20"></label>
+        <label><span data-i18n="fMahalla"></span> <select name="mahalla" id="reqMahalla" required></select></label>
+        <label><span data-i18n="fSoha"></span> <select name="soha" id="reqSoha" required></select></label>
+        <label><span data-i18n="fMeeting"></span> <select name="uchrashuv" id="reqMeeting"></select></label>
+        <label class="full"><span data-i18n="fText"></span> <textarea name="mazmun" rows="4" required maxlength="1500" data-i18n-ph="fTextPh"></textarea></label>
+      </div>
+      <button class="btn" type="submit" data-i18n="submit"></button>
+      <p class="form-note" id="reqNote"></p>
+      <p class="muted small" data-i18n="reqLocalNote"></p>
+    </form>
+  </section>
+
+  <section class="wrap section admin" id="admin" hidden>
+    <div class="section-head">
+      <h2 data-i18n="admTitle"></h2>
+      <p data-i18n="admSub"></p>
+    </div>
+    <div class="analytics">
+      <form class="panel form" id="meetingForm">
+        <h3 data-i18n="admAnnounce"></h3>
+        <div class="grid2">
+          <label><span data-i18n="fDate"></span> <input type="date" name="sana" required></label>
+          <label><span data-i18n="fTime"></span> <input type="time" name="vaqt" value="10:00" required></label>
+          <label class="full"><span data-i18n="fPlace"></span> <input name="joy" required data-i18n-ph="fPlacePh"></label>
+          <label class="full"><span data-i18n="fTopic"></span> <input name="mavzu" required></label>
+        </div>
+        <button class="btn" type="submit" data-i18n="announce"></button>
+        <div id="meetingList" class="req-list"></div>
+      </form>
+      <div class="panel">
+        <h3 data-i18n="incoming"></h3>
+        <div id="requestList" class="req-list"></div>
+        <div class="row-actions mt"><button class="btn btn-sm" id="exportReq" type="button" data-i18n="exportReq"></button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-in">
+    <div>
+      <b data-i18n="brandTitle"></b>
+      <p data-i18n="brandSub"></p>
+    </div>
+    <p class="muted" id="footNote"></p>
+  </div>
+</footer>
+
+<dialog id="detail" class="dialog">
+  <button class="close" id="closeDetail" data-i18n-aria="close">×</button>
+  <div id="detailBody"></div>
+</dialog>
+
+<script src="js/i18n.js"></script>
+<script src="js/data.js"></script>
+<script src="js/reyestr.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
